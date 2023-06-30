@@ -20,6 +20,10 @@ module.exports = {
       },
       screens: {
         lg: '1120px'
+      },
+      backgroundImage: {
+        'redTurn': 'url("./assets/images/turn-background-red.svg")',
+        'yellowTurn': 'url("./assets/images/turn-background-yellow.svg")',
       }
     },
   },

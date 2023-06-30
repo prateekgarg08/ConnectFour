@@ -18,9 +18,12 @@ export const GameProvider = ({ children }: { children: JSX.Element }) => {
     color: "yellow",
   });
 
-  const [winArray, setWinArray] = useState<number[]>([]);
-  const [currentPlayer, setCurrentPlayer] = useState<1 | 2>(1);
+  const [timer, setTimer] = useState<number>(30);
 
+  const [winArray, setWinArray] = useState<number[]>([]);
+  const [currentPlayer, setCurrentPlayer] = useState<1 | 2>(2);
+  const [isGameInProgress, setIsGameInProgress] = useState<boolean>(true);
+  const [winner, setWinner] = useState<1 | 2 | "tie" | "none">("none");
   const switchCurrentPlayer = () => {
     console.log("hi");
     setCurrentPlayer((prev) => {
@@ -64,21 +67,51 @@ export const GameProvider = ({ children }: { children: JSX.Element }) => {
       return newArr;
     });
 
-    switchCurrentPlayer();
+    // switchCurrentPlayer();
     setIsPause(false);
   };
+  useEffect(() => {
+    console.log("here");
+    if (isPause == false) {
+      const id = setInterval(() => {
+        setTimer((t) => t - 1);
+      }, 1000);
+
+      return () => clearInterval(id);
+    }
+  }, [isPause]);
 
   useEffect(() => {
+    if (timer <= 0) {
+      switchCurrentPlayer();
+      setTimer(30);
+    }
+  }, [timer]);
+  useEffect(() => {
     console.log(pos, GameGrid);
+
     const r = isGamerOver(GameGrid, pos);
-    if (r.isOver) {
+    if (r.isOver && GameGrid.length > 0) {
       console.log("hola", r);
       setIsPause(true);
+      setIsGameInProgress(false);
       if (r.isWin) {
-        setWinArray(r.winArr);
+        setTimeout(() => {
+          setWinArray(r.winArr);
+        }, 250);
+        setWinner(currentPlayer);
+        if (currentPlayer == 1) playerOne.score++;
+        if (currentPlayer == 2) playerTwo.score++;
+      } else {
+        setWinner("tie");
       }
     } else {
       setIsPause(false);
+      // setIsGameInProgress(true);
+      setWinner("none");
+
+      switchCurrentPlayer();
+      setTimer(30);
     }
   }, [GameGrid]);
 
@@ -91,14 +124,17 @@ export const GameProvider = ({ children }: { children: JSX.Element }) => {
   // }
   // useEffect(()=>{})
   useEffect(() => {
-    setGameGrid(() => {
-      const newArr: gc[] = [];
-      for (let i = 0; i < 42; i++) {
-        newArr.push("empty");
-      }
-      return newArr;
-    });
-  }, []);
+    if (isGameInProgress) {
+      setGameGrid(() => {
+        const newArr: gc[] = [];
+        for (let i = 0; i < 42; i++) {
+          newArr.push("empty");
+        }
+        return newArr;
+      });
+      setWinArray([]);
+    }
+  }, [isGameInProgress]);
 
   useEffect(() => console.log(GameGrid), [GameGrid]);
 
@@ -111,6 +147,12 @@ export const GameProvider = ({ children }: { children: JSX.Element }) => {
         dropCounter,
         currentPlayer,
         winArray,
+        timer,
+        isGameInProgress,
+        setIsGameInProgress,
+        winner,
+        playerOne,
+        playerTwo,
       }}
     >
       {children}

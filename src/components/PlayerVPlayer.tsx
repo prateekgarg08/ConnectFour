@@ -2,9 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import PlayingGrid from "./GameComponents/PlayingGrid";
 import logo from "../assets/images/logo.svg";
-import playerOne from "../assets/images/player-one.svg";
-import playerTwo from "../assets/images/player-two.svg";
+import playerOneImg from "../assets/images/player-one.svg";
+import playerTwoImg from "../assets/images/player-two.svg";
+import { useGameContext } from "../contexts/GameContext";
+
 export default function PlayerVPlayer() {
+  const { playerOne, playerTwo } = useGameContext();
   return (
     <motion.div
       initial={{ x: "1000", opacity: 0 }}
@@ -21,27 +24,28 @@ export default function PlayerVPlayer() {
               Restart{" "}
             </button>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-none items-center justify-center gap-x-5 lg:gap-x-10 gap-y-5 md:gap-y-12  sm:px-12 lg:gap-10">
+          <div className="relative grid grid-cols-2 lg:grid-cols-none items-center justify-center gap-x-5 lg:gap-x-10 gap-y-5 md:gap-y-12  sm:px-12 lg:gap-10">
             <div className="relative flex flex-col col-span-1 lg:col-start-1 row-start-1 bg-white max-w-lg border-black border-[3px] rounded-2xl shadow-darkBlack items-center lg:gap-2 px-5 py-3 lg:py-8">
               <h4 className="font-bold uppercase text-lg lg:text-2xl">Player 1</h4>
-              <span className="font-bold text-2xl lg:text-5xl">2</span>
+              <span className="font-bold text-2xl lg:text-5xl">{playerOne.score}</span>
               <img
-                src={playerOne}
+                src={playerOneImg}
                 className="absolute top-[50%] translate-y-[-50%] left-0 lg:top-0 lg:left-[50%] translate-x-[-50%] lg:translate-y-[-50%]"
                 alt=""
               />
             </div>
             <div className="relative flex flex-col col-span-1 row-start-1 bg-white max-w-lg border-black border-[3px] rounded-2xl shadow-darkBlack items-center lg:gap-2 px-5 py-3 lg:py-8">
               <h4 className="font-bold uppercase text-lg lg:text-2xl">Player 2</h4>
-              <span className="font-bold text-2xl lg:text-5xl">2</span>
+              <span className="font-bold text-2xl lg:text-5xl">{playerTwo.score}</span>
               <img
-                src={playerTwo}
+                src={playerTwoImg}
                 className="absolute top-[50%] translate-y-[-50%] right-0  translate-x-[50%] lg:top-0 lg:left-[50%] lg:translate-x-[-50%] lg:translate-y-[-50%]"
                 alt=""
               />
             </div>
             <PlayingGrid className="col-span-2 lg:col-start-2 lg:row-start-1 translate-y-5 lg:translate-y-10" />
             {/* <div></div> */}
+            {/* <TurnAndResult /> */}
           </div>
         </div>
       </div>
