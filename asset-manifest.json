@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/ConnectFour/static/css/main.ef42c7a7.css",
-    "main.js": "/ConnectFour/static/js/main.1b1a256d.js",
+    "main.js": "/ConnectFour/static/js/main.bf8a2c34.js",
     "static/js/787.f9aae9f3.chunk.js": "/ConnectFour/static/js/787.f9aae9f3.chunk.js",
     "static/media/SpaceGrotesk-VariableFont_wght.ttf": "/ConnectFour/static/media/SpaceGrotesk-VariableFont_wght.1036357b9651eff7d3dd.ttf",
     "static/media/board-layer-black-small.svg": "/ConnectFour/static/media/board-layer-black-small.42afffd73e45d00ba497d42094c95366.svg",
@@ -21,11 +21,11 @@
     "static/media/marker-yellow.svg": "/ConnectFour/static/media/marker-yellow.a8ee5c49c251b26a543fb469cccdffa8.svg",
     "index.html": "/ConnectFour/index.html",
     "main.ef42c7a7.css.map": "/ConnectFour/static/css/main.ef42c7a7.css.map",
-    "main.1b1a256d.js.map": "/ConnectFour/static/js/main.1b1a256d.js.map",
+    "main.bf8a2c34.js.map": "/ConnectFour/static/js/main.bf8a2c34.js.map",
     "787.f9aae9f3.chunk.js.map": "/ConnectFour/static/js/787.f9aae9f3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ef42c7a7.css",
-    "static/js/main.1b1a256d.js"
+    "static/js/main.bf8a2c34.js"
   ]
 }
